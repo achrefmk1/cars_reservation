@@ -5,14 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Service extends Model
+class DayOff extends Model
 {
     use HasFactory;
 
-    protected $table = "agency_service";
-
-    protected $fillable = ['service', 'period', "times"];
-
+    protected $fillable = ['name', 'date', 'agency_id'];
 
     public function agency()
     {

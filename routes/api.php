@@ -4,6 +4,8 @@ use App\Http\Controllers\AgencyController;
 use App\Http\Controllers\AgencyServiceController;
 use App\Http\Controllers\AuthAPIController;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\DayOffController;
+use App\Http\Controllers\RDVController;
 use App\Http\Controllers\ServiceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -25,14 +27,24 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::apiResource('services', ServiceController::class);
 Route::apiResource('cars', CarController::class);
-Route::post('cars/toggleStatus/{car}', [CarController::class, 'toggleStatus']);
 Route::apiResource('agencies', AgencyController::class);
+Route::resource('days', DayOffController::class);
+
+Route::get('agencies/days/{agency}', [DayOffController::class, 'getDays']);
+
+Route::post('cars/toggleStatus/{car}', [CarController::class, 'toggleStatus']);
+
 Route::get('users', [AuthAPIController::class, 'index']);
 Route::post('users/{user}', [AuthAPIController::class, 'update']);
 Route::post('users/toggleStatus/{user}', [AuthAPIController::class, 'toggleStatus']);
 
-Route::post('agencies/{agency}/services/{service}', [AgencyServiceController::class, 'assign']);
-Route::delete('agencies/{agency}/services/{service}', [AgencyServiceController::class, 'unassign']);
+Route::post('agencies/find', [AgencyController::class, 'find']);
+Route::get('agencies/services/{agency}', [AgencyServiceController::class, 'getByAgency']);
+Route::put('agencies/services/{agency}', [AgencyServiceController::class, 'update']);
+Route::post('agencies/services/store', [AgencyServiceController::class, 'store']);
+
+Route::post('rdv/{agency}', [RDVController::class, 'checkForRDV']);
+Route::post('rdv/store', [RDVController::class, 'store']);
 
 
 

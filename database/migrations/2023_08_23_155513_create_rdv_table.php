@@ -11,14 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('r_d_v_s', function (Blueprint $table) {
+        Schema::create('rdv', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('date');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('agency_id');
-            $table->foreign('agency_id')->references('id')->on('agencies');
+            $table->string('service');
+            $table->unsignedBigInteger('car_id');
+            $table->date('date');
+            $table->time('start');
+            $table->time('end');
             $table->timestamps();
+
+            $table->foreign('agency_id')->references('id')->on('agencies')->onDelete('cascade');
+            $table->foreign('car_id')->references('id')->on('cars')->onDelete('cascade');
         });
     }
 
@@ -27,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('r_d_v_s');
+        Schema::dropIfExists('rdv');
     }
 };

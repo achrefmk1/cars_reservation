@@ -11,7 +11,14 @@ class AgencyController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api');
+        $this->middleware('auth:api', ['except' => ['find']]);
+    }
+
+    public function find(Request $request)
+    {
+        $agencies = Agency::where('adresse', 'like', '%' . $request->adresse . '%')
+            ->get();
+        return response()->json(['data' => $agencies], Response::HTTP_OK);
     }
 
     public function index()
@@ -42,6 +49,4 @@ class AgencyController extends Controller
         $agency->delete();
         return response()->json(null, Response::HTTP_NO_CONTENT);
     }
-
-    
 }

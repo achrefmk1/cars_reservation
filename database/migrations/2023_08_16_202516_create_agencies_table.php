@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->json('workDays');
             $table->time('start');
+            $table->time('end');
             $table->enum('isEnabled', ['yes', 'no'])->default('yes');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');

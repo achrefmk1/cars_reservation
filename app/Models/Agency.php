@@ -9,12 +9,17 @@ class Agency extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'adresse', 'phone', 'email', 'workDays', 'start', 'user_id'];
+    protected $fillable = ['name', 'adresse', 'phone', 'email', 'workDays', 'start', 'end', 'user_id'];
 
 
     public function services()
     {
-        return $this->belongsToMany(Service::class);
+        return $this->hasMany(Service::class);
+    }
+
+    public function days()
+    {
+        return $this->hasMany(DayOff::class);
     }
 
     /**

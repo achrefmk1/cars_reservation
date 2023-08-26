@@ -11,11 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('services', function (Blueprint $table) {
+        Schema::create('day_offs', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 100);
-            $table->enum('isEnabled', ['yes', 'no'])->default('yes');
+            $table->unsignedBigInteger('agency_id');
+            $table->date('date');
+            $table->string('name');
             $table->timestamps();
+
+            $table->foreign('agency_id')->references('id')->on('agencies')->onDelete('cascade');
         });
     }
 
@@ -24,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('services');
+        Schema::dropIfExists('day_offs');
     }
 };

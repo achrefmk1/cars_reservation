@@ -18,7 +18,8 @@ class CarController extends Controller
 
     public function index()
     {
-        $cars = Car::all();
+        // $cars = Car::all();
+        $cars = Auth::user()->cars;
         return response()->json(['data' => $cars], Response::HTTP_OK);
     }
 
