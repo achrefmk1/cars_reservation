@@ -43,8 +43,10 @@ Route::get('agencies/services/{agency}', [AgencyServiceController::class, 'getBy
 Route::put('agencies/services/{agency}', [AgencyServiceController::class, 'update']);
 Route::post('agencies/services/store', [AgencyServiceController::class, 'store']);
 
-Route::post('rdv/{agency}', [RDVController::class, 'checkForRDV']);
 Route::post('rdv/store', [RDVController::class, 'store']);
+Route::get('rdv/getCarHistory/{car}', [RDVController::class, 'getCarHistory']);
+Route::get('rdv/getAgencyHistory/{agency}', [RDVController::class, 'getAgencyHistory']);
+Route::post('rdv/{agency}', [RDVController::class, 'checkForRDV']);
 
 
 

@@ -61,8 +61,8 @@ class AuthAPIController extends Controller
             Log::critical('api register : ' . $e->getMessage());
             return response()->json([
                 'error' => true,
-                'message' => $e->getMessage(),
-            ]);
+                'message' => $request->role,
+            ], 402);
         }
     }
 
